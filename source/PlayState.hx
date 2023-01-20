@@ -85,16 +85,16 @@ class PlayState extends MusicBeatState
 	public static var cameramovingoffsetbf = 20; // idk why i made literally same variable
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['F', 0.2], //From 0% to 19%
+		['F-', 0.2], //From 0% to 19%
 		['E', 0.4], //From 20% to 39%
 		['D', 0.5], //From 40% to 49%
 		['C', 0.6], //From 50% to 59%
-		['B', 0.69], //From 60% to 68%
-		['A', 0.7], //69%
-		['AA', 0.8], //From 70% to 79%
-		['AAA', 0.9], //From 80% to 89%
-		['AAAA', 1], //From 90% to 99%
-		['AAAAA', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['sick', 0.69], //From 60% to 68%
+		['uh oh', 0.7], //69%
+		['good =/', 0.8], //From 70% to 79%
+		['good', 0.9], //From 80% to 89%
+		['not bad great', 1], //From 90% to 99%
+		['we know love ice cream', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 	public static var animatedShaders:Map<String, DynamicShaderHandler> = new Map<String, DynamicShaderHandler>();
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
@@ -340,16 +340,16 @@ class PlayState extends MusicBeatState
 		Paths.clearStoredMemory();
 
 		ratingStuff = [
-			['F', 0.2], //From 0% to 19%
+			['F-', 0.2], //From 0% to 19%
 			['E', 0.4], //From 20% to 39%
 			['D', 0.5], //From 40% to 49%
 			['C', 0.6], //From 50% to 59%
-			['B', 0.69], //From 60% to 68%
-			['A', 0.7], //69%
-			['AA', 0.8], //From 70% to 79%
-			['AAA', 0.9], //From 80% to 89%
-			['AAAA', 1], //From 90% to 99%
-			['AAAAA', 1] //The value on this one isn't used actually, since Perfect is always "1"
+			['sick', 0.69], //From 60% to 68%
+			['uh oh', 0.7], //69%
+			['good =/', 0.8], //From 70% to 79%
+			['good', 0.9], //From 80% to 89%
+			['not bad great', 1], //From 90% to 99%
+			['we know love ice cream', 1] //The value on this one isn't used actually, since Perfect is always "1"
 		];
 
 		// for lua
@@ -475,6 +475,8 @@ class PlayState extends MusicBeatState
 					curStage = 'schoolEvil';
 				case 'ugh' | 'guns' | 'stress':
 					curStage = 'tank';
+				case 'Canell.Really' | 'Best' | 'Ezra':
+					curStage = 'ayed'
 				default:
 					curStage = 'stage';
 			}
@@ -1264,7 +1266,8 @@ class PlayState extends MusicBeatState
 
 		healthBarOverlay = new FlxSprite().loadGraphic(Paths.image('healthBarOverlay'));
 		healthBarOverlay.y = FlxG.height * 0.89;
-		healthBarOverlay.screenCenter(X);
+		//healthBarOverlay.screenCenter(X);
+		healthBarOverlay.x = -200;
 		healthBarOverlay.scrollFactor.set();
 		healthBarOverlay.visible = !ClientPrefs.hideHud;
         healthBarOverlay.color = FlxColor.BLACK;
@@ -2467,13 +2470,13 @@ class PlayState extends MusicBeatState
 	public function updateScore(miss:Bool = false)
 	{
 		if(ratingName == '?') {
-			scoreTxt.text = 'Score: ' + songScore 
-			+ ' | Combo Breaks: ' + songMisses 
+			scoreTxt.text = 'GoodJob: ' + songScore 
+			+ ' | BAAOO: ' + songMisses 
 			+ ' | Average: ?'
 			+ ' | Accuracy: ' + ratingName;
 		} else {
-			scoreTxt.text = 'Score: ' + songScore 
-			+ ' | Combo Breaks: ' + songMisses 
+			scoreTxt.text = 'GoodJob: ' + songScore 
+			+ ' | BAAOO: ' + songMisses 
 			+ ' | Average: ' + Math.round(averageMs) + 'ms'
 			+ ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' 
 			+ ' | ' + ratingName + ' [' + ratingFC + ']';
@@ -5557,12 +5560,12 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			if (perfects > 0 && !ClientPrefs.removePerfects) ratingFC = "PFC";
+			if (perfects > 0 && !ClientPrefs.removePerfects) ratingFC = "ICE CREAM";
 			if (sicks > 0) ratingFC = "SFC";
 			if (goods > 0) ratingFC = "GFC";
 			if (bads > 0 || shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
-			else if (songMisses >= 10) ratingFC = "Clear";
+			else if (songMisses >= 15) ratingFC = "Clear";
 		}
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
